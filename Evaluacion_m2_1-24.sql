@@ -1,3 +1,4 @@
+
 -- EVALUACIÓN FINAL MÓDULO 2
 
 
@@ -456,3 +457,45 @@ WHERE
 ORDER BY
    a.last_name, 
    a.first_name;	
+  
+
+  
+  
+  
+-- BONUS --
+  
+-- Ejercicio 24. BONUS: Encuentra el título de las películas que son comedias y tienen una duración mayor a 180 minutos en la tabla film:
+  
+SELECT 
+  f.title,
+  f.length
+FROM
+  film f
+INNER JOIN 
+  film_category fc ON f.film_id = fc.film_id 
+INNER JOIN 
+  category c ON fc.category_id = c.category_id 
+WHERE 
+  c.name = 'comedy' AND f.length >180;
+  
+ 
+-- Usando CET:
+
+ WITH ComedyFilms AS (
+    SELECT
+        f.title,
+        f.length
+    FROM
+        film f
+    INNER JOIN
+        film_category fc ON f.film_id = fc.film_id
+    INNER JOIN
+        category c ON fc.category_id = c.category_id
+    WHERE
+        c.name = 'Comedy' AND f.length > 180
+ )
+ SELECT
+    cf.title,
+    cf.length
+ FROM
+    ComedyFilms cf;
